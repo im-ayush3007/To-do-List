@@ -10,19 +10,20 @@
   --bg: #0e0e0f;
   --surface: #161618;
   --surface2: #1e1e21;
+  --surface3: #232328;
   --border: #2a2a2e;
   --border2: #3a3a3f;
   --text: #f0ede8;
   --muted: #7a7882;
   --accent: #c8a96e;
   --accent2: #8b5cf6;
+  --accent3: #3b9eff;
   --danger: #e05252;
   --success: #52c97a;
   --tag-bg: #252528;
+  --subtask-bg: #13131a;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 body {
   background: var(--bg);
   color: var(--text);
@@ -31,8 +32,6 @@ body {
   min-height: 100vh;
   line-height: 1.6;
 }
-
-/* --- HEADER --- */
 header {
   border-bottom: 1px solid var(--border);
   padding: 0 40px;
@@ -46,29 +45,12 @@ header {
   backdrop-filter: blur(12px);
   z-index: 100;
 }
-
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  letter-spacing: -0.5px;
-  color: var(--text);
-}
+.logo { font-family: 'Playfair Display', serif; font-size: 22px; letter-spacing: -0.5px; color: var(--text); }
 .logo span { color: var(--accent); }
+.header-meta { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
 
-.header-meta {
-  font-size: 12px;
-  color: var(--muted);
-  font-family: 'DM Mono', monospace;
-}
-
-/* --- LAYOUT --- */
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 24px 80px;
-}
-
-/* --- ADD FORM --- */
+/* ADD FORM */
 .add-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -76,7 +58,6 @@ header {
   padding: 28px 32px;
   margin-bottom: 40px;
 }
-
 .add-card h2 {
   font-family: 'Playfair Display', serif;
   font-size: 18px;
@@ -87,7 +68,6 @@ header {
   align-items: center;
   gap: 10px;
 }
-
 .add-card h2::before {
   content: '';
   display: inline-block;
@@ -95,25 +75,10 @@ header {
   height: 2px;
   background: var(--accent);
 }
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form-full { grid-column: 1 / -1; }
-
 .field { display: flex; flex-direction: column; gap: 6px; }
-
-.field label {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 500;
-}
-
+.field label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
 .field input, .field textarea, .field select {
   background: var(--surface2);
   border: 1px solid var(--border);
@@ -126,18 +91,9 @@ header {
   outline: none;
   transition: border-color 0.2s;
 }
-
-.field input:focus, .field textarea:focus {
-  border-color: var(--accent);
-}
-
-.field textarea { resize: vertical; min-height: 80px; }
-
-.field input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.6);
-  cursor: pointer;
-}
-
+.field input:focus, .field textarea:focus { border-color: var(--accent); }
+.field textarea { resize: vertical; min-height: 72px; }
+.field input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); cursor: pointer; }
 .btn-add {
   background: var(--accent);
   color: #1a1208;
@@ -154,15 +110,8 @@ header {
 .btn-add:hover { opacity: 0.88; }
 .btn-add:active { transform: scale(0.98); }
 
-/* --- FILTER BAR --- */
-.filter-bar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
+/* FILTER BAR */
+.filter-bar { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; align-items: center; }
 .filter-btn {
   background: transparent;
   border: 1px solid var(--border);
@@ -174,107 +123,46 @@ header {
   cursor: pointer;
   transition: all 0.2s;
 }
-.filter-btn:hover, .filter-btn.active {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: rgba(200,169,110,0.07);
-}
+.filter-btn:hover, .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(200,169,110,0.07); }
+.count-badge { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); margin-left: auto; }
 
-.count-badge {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-  margin-left: auto;
-}
-
-/* --- TODO ITEMS --- */
+/* TODO ITEMS */
 .todo-list { display: flex; flex-direction: column; gap: 12px; }
-
 .todo-item {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  transition: border-color 0.2s, transform 0.15s;
+  transition: border-color 0.2s;
   animation: slideIn 0.3s ease;
 }
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
+@keyframes slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 .todo-item:hover { border-color: var(--border2); }
 .todo-item.completed { opacity: 0.55; }
+.todo-main { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; }
 
-.todo-main {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 18px 20px;
-}
-
-/* Custom checkbox */
-.check-wrap {
-  flex-shrink: 0;
-  margin-top: 3px;
-}
+/* Checkbox */
+.check-wrap { flex-shrink: 0; margin-top: 3px; }
 .check-wrap input[type="checkbox"] { display: none; }
 .check-wrap label {
-  width: 20px;
-  height: 20px;
+  width: 20px; height: 20px;
   border: 2px solid var(--border2);
   border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   cursor: pointer;
   transition: all 0.2s;
   flex-shrink: 0;
 }
-.check-wrap input:checked + label {
-  background: var(--success);
-  border-color: var(--success);
-}
+.check-wrap input:checked + label { background: var(--success); border-color: var(--success); }
 .check-wrap label svg { display: none; }
 .check-wrap input:checked + label svg { display: block; }
 
 .todo-body { flex: 1; min-width: 0; }
-
-.todo-topic {
-  font-family: 'Playfair Display', serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.3;
-}
+.todo-topic { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.3; }
 .completed .todo-topic { text-decoration: line-through; color: var(--muted); }
-
-.todo-subtopic {
-  font-size: 12px;
-  color: var(--accent);
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  margin-top: 2px;
-}
-
-.todo-desc {
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 6px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.todo-meta {
-  display: flex;
-  gap: 12px;
-  margin-top: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
+.todo-subtopic { font-size: 12px; color: var(--accent); font-weight: 500; letter-spacing: 0.04em; margin-top: 2px; }
+.todo-desc { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+.todo-meta { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
 .due-tag {
   font-family: 'DM Mono', monospace;
   font-size: 11px;
@@ -284,47 +172,40 @@ header {
   color: var(--muted);
   border: 1px solid var(--border);
 }
-
 .due-tag.overdue { color: var(--danger); border-color: rgba(224,82,82,0.3); background: rgba(224,82,82,0.07); }
 .due-tag.today { color: var(--accent); border-color: rgba(200,169,110,0.3); background: rgba(200,169,110,0.08); }
 .due-tag.upcoming { color: var(--success); border-color: rgba(82,201,122,0.3); background: rgba(82,201,122,0.07); }
-
-.created-tag {
-  font-size: 11px;
-  color: var(--border2);
-  font-family: 'DM Mono', monospace;
-}
-
-.comment-count {
-  font-size: 11px;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  user-select: none;
-}
+.created-tag { font-size: 11px; color: var(--border2); font-family: 'DM Mono', monospace; }
+.comment-count { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 4px; cursor: pointer; user-select: none; }
 .comment-count:hover { color: var(--accent2); }
 
-/* Actions */
-.todo-actions {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-  align-items: flex-start;
-  margin-top: 2px;
+/* Progress bar */
+.subtask-progress { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.progress-bar-wrap {
+  flex: 1;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  max-width: 120px;
 }
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.progress-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); }
 
+/* Actions */
+.todo-actions { display: flex; gap: 6px; flex-shrink: 0; align-items: flex-start; margin-top: 2px; }
 .btn-icon {
   background: transparent;
   border: 1px solid transparent;
   color: var(--muted);
-  width: 30px;
-  height: 30px;
+  width: 30px; height: 30px;
   border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   cursor: pointer;
   font-size: 13px;
   transition: all 0.15s;
@@ -334,37 +215,198 @@ header {
 .btn-icon.delete:hover { color: var(--danger); border-color: rgba(224,82,82,0.3); }
 .btn-icon.expand-btn:hover { color: var(--accent2); }
 
-/* --- COMMENTS SECTION --- */
+/* SUBTASKS SECTION */
+.subtasks-section {
+  border-top: 1px solid var(--border);
+  background: var(--subtask-bg);
+  display: none;
+}
+.subtasks-section.open { display: block; }
+
+.subtasks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.subtasks-header span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 500;
+}
+.btn-add-subtask {
+  background: rgba(200,169,110,0.12);
+  border: 1px solid rgba(200,169,110,0.25);
+  color: var(--accent);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-add-subtask:hover { background: rgba(200,169,110,0.2); }
+
+/* Add subtask form */
+.add-subtask-form {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(200,169,110,0.03);
+  display: none;
+}
+.add-subtask-form.open { display: block; }
+.add-subtask-form .form-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+.add-subtask-form .field input,
+.add-subtask-form .field textarea {
+  background: var(--surface2);
+  font-size: 13px;
+  padding: 8px 12px;
+}
+.add-subtask-form .field textarea { min-height: 56px; }
+.subtask-form-actions { display: flex; gap: 8px; margin-top: 10px; justify-content: flex-end; }
+.btn-save-subtask {
+  background: var(--accent);
+  color: #1a1208;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 18px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.btn-save-subtask:hover { opacity: 0.88; }
+.btn-cancel-subtask {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-cancel-subtask:hover { border-color: var(--border2); color: var(--text); }
+
+/* Subtask item */
+.subtask-list { padding: 0; }
+.subtask-item {
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  transition: background 0.15s;
+}
+.subtask-item:last-child { border-bottom: none; }
+.subtask-item:hover { background: rgba(255,255,255,0.02); }
+.subtask-item.st-completed { opacity: 0.5; }
+
+.subtask-main { display: flex; align-items: flex-start; gap: 10px; }
+.st-check-wrap { flex-shrink: 0; margin-top: 2px; }
+.st-check-wrap input[type="checkbox"] { display: none; }
+.st-check-wrap label {
+  width: 16px; height: 16px;
+  border: 2px solid var(--border2);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.st-check-wrap input:checked + label { background: var(--success); border-color: var(--success); }
+.st-check-wrap label svg { display: none; }
+.st-check-wrap input:checked + label svg { display: block; }
+
+.subtask-body { flex: 1; min-width: 0; }
+.subtask-title { font-size: 13px; font-weight: 500; color: var(--text); }
+.st-completed .subtask-title { text-decoration: line-through; color: var(--muted); }
+.subtask-desc { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+.subtask-due { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 4px; }
+.subtask-due.st-overdue { color: var(--danger); }
+.subtask-due.st-today { color: var(--accent); }
+
+/* Checklist inside subtask */
+.checklist-wrap { margin-top: 8px; padding: 8px 10px; background: var(--surface2); border-radius: 8px; border: 1px solid var(--border); }
+.checklist-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.checklist-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; }
+.checklist-progress { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); }
+.checklist-items { display: flex; flex-direction: column; gap: 4px; margin-bottom: 6px; }
+.checklist-row { display: flex; align-items: center; gap: 8px; }
+.checklist-row input[type="checkbox"] { display: none; }
+.checklist-row label {
+  width: 14px; height: 14px; flex-shrink: 0;
+  border: 1.5px solid var(--border2);
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.checklist-row input:checked + label { background: var(--accent3); border-color: var(--accent3); }
+.checklist-row label svg { display: none; }
+.checklist-row input:checked + label svg { display: block; }
+.checklist-text { font-size: 12px; color: var(--text); flex: 1; transition: color 0.15s; }
+.checklist-row.cl-checked .checklist-text { text-decoration: line-through; color: var(--muted); }
+.btn-del-cl { background: none; border: none; color: var(--border2); font-size: 10px; cursor: pointer; padding: 0 2px; transition: color 0.15s; flex-shrink: 0; }
+.btn-del-cl:hover { color: var(--danger); }
+.add-checklist-row { display: flex; gap: 6px; margin-top: 4px; }
+.add-checklist-row input {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 11px;
+  padding: 5px 8px;
+  outline: none;
+  font-family: 'DM Sans', sans-serif;
+}
+.add-checklist-row input:focus { border-color: var(--accent3); }
+.btn-add-cl {
+  background: rgba(59,158,255,0.15);
+  border: 1px solid rgba(59,158,255,0.3);
+  color: var(--accent3);
+  font-size: 10px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+.btn-add-cl:hover { background: rgba(59,158,255,0.25); }
+
+.subtask-actions { display: flex; gap: 4px; flex-shrink: 0; }
+.btn-st-icon {
+  background: transparent; border: 1px solid transparent;
+  color: var(--muted); width: 24px; height: 24px;
+  border-radius: 5px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 11px; transition: all 0.15s;
+}
+.btn-st-icon:hover { background: var(--surface3); border-color: var(--border); color: var(--text); }
+.btn-st-icon.delete:hover { color: var(--danger); border-color: rgba(224,82,82,0.3); }
+
+/* COMMENTS SECTION */
 .comments-section {
   border-top: 1px solid var(--border);
   padding: 14px 20px 18px;
   background: rgba(0,0,0,0.15);
   display: none;
 }
-
 .comments-section.open { display: block; }
-
 .comment-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-
 .comment-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
+  display: flex; align-items: flex-start; gap: 10px;
   padding: 8px 10px;
   background: var(--surface2);
   border-radius: 8px;
   border: 1px solid var(--border);
   font-size: 13px;
 }
-
 .comment-text { flex: 1; color: var(--text); font-weight: 300; }
 .comment-time { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); white-space: nowrap; }
-.btn-del-comment {
-  background: none; border: none; color: var(--border2); font-size: 12px;
-  cursor: pointer; flex-shrink: 0; transition: color 0.15s; padding: 0 2px;
-}
+.btn-del-comment { background: none; border: none; color: var(--border2); font-size: 12px; cursor: pointer; flex-shrink: 0; transition: color 0.15s; padding: 0 2px; }
 .btn-del-comment:hover { color: var(--danger); }
-
 .comment-form { display: flex; gap: 8px; }
 .comment-form input {
   flex: 1;
@@ -380,33 +422,21 @@ header {
 }
 .comment-form input:focus { border-color: var(--accent2); }
 .btn-comment {
-  background: var(--accent2);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 8px 16px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity 0.15s;
+  background: var(--accent2); color: #fff; border: none; border-radius: 8px;
+  font-size: 12px; font-weight: 500; padding: 8px 16px; cursor: pointer; white-space: nowrap; transition: opacity 0.15s;
 }
 .btn-comment:hover { opacity: 0.85; }
 
-/* --- EDIT MODAL --- */
+/* EDIT MODAL */
 .modal-overlay {
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background: rgba(0,0,0,0.75);
   backdrop-filter: blur(4px);
   z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
+  display: none; align-items: center; justify-content: center;
   padding: 20px;
 }
 .modal-overlay.open { display: flex; }
-
 .modal {
   background: var(--surface);
   border: 1px solid var(--border2);
@@ -415,65 +445,25 @@ header {
   width: 100%;
   max-width: 520px;
   animation: modalIn 0.2s ease;
+  max-height: 90vh;
+  overflow-y: auto;
 }
-
-@keyframes modalIn {
-  from { opacity: 0; transform: scale(0.96) translateY(10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.modal h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 400;
-  margin-bottom: 22px;
-  color: var(--text);
-}
-
-.modal-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-.btn-cancel {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  padding: 9px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
+@keyframes modalIn { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.modal h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 400; margin-bottom: 22px; color: var(--text); }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+.btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 9px 20px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
 .btn-cancel:hover { border-color: var(--border2); color: var(--text); }
-
-.btn-save {
-  background: var(--accent);
-  color: #1a1208;
-  border: none;
-  border-radius: 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 9px 24px;
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
+.btn-save { background: var(--accent); color: #1a1208; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 24px; cursor: pointer; transition: opacity 0.15s; }
 .btn-save:hover { opacity: 0.88; }
 
-/* --- EMPTY STATE --- */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--muted);
-}
+/* Edit subtask modal */
+#editSubtaskModal .modal { max-width: 480px; }
+
+/* EMPTY STATE */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 .empty-state .big { font-family: 'Playfair Display', serif; font-size: 32px; opacity: 0.25; margin-bottom: 12px; }
 .empty-state p { font-size: 14px; }
 
-/* --- SCROLLBAR --- */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
@@ -484,6 +474,7 @@ header {
   .add-card { padding: 20px 18px; }
   .form-grid { grid-template-columns: 1fr; }
   .form-full { grid-column: 1; }
+  .add-subtask-form .form-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -515,7 +506,7 @@ header {
         </div>
         <div class="field">
           <label>Due Date</label>
-          <input type="date" name="due_date">
+          <input type="date" name="due_date" id="main-due-date">
         </div>
         <div class="field" style="justify-content: flex-end;">
           <label>&nbsp;</label>
@@ -558,12 +549,8 @@ header {
           <!-- Content -->
           <div class="todo-body">
             <div class="todo-topic">{{ t.topic }}</div>
-            {% if t.subtopic %}
-            <div class="todo-subtopic">{{ t.subtopic }}</div>
-            {% endif %}
-            {% if t.description %}
-            <div class="todo-desc">{{ t.description }}</div>
-            {% endif %}
+            {% if t.subtopic %}<div class="todo-subtopic">{{ t.subtopic }}</div>{% endif %}
+            {% if t.description %}<div class="todo-desc">{{ t.description }}</div>{% endif %}
             <div class="todo-meta">
               {% if t.due_date %}
               <span class="due-tag" id="due-{{ t.id }}">📅 {{ t.due_date }}</span>
@@ -573,13 +560,35 @@ header {
                 <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
                   <path d="M14 2H2C1.4 2 1 2.4 1 3v8c0 .6.4 1 1 1h2v3l3.5-3H14c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1z" stroke="currentColor" stroke-width="1.5" fill="none"/>
                 </svg>
-                <span id="ccount-{{ t.id }}">{{ t.comments|length }}</span> comment{{ 's' if t.comments|length != 1 else '' }}
+                <span id="ccount-{{ t.id }}">{{ t.comments|length }}</span>
               </span>
             </div>
+            <!-- Subtask progress -->
+            {% set subtasks = t.get('subtasks', []) %}
+            {% if subtasks %}
+            {% set done_count = subtasks|selectattr('completed')|list|length %}
+            {% set progress = (done_count / (subtasks|length) * 100)|int %}
+            <div class="subtask-progress" id="stprog-{{ t.id }}">
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="stbar-{{ t.id }}" data-progress="{{ progress }}"></div>
+              </div>
+              <span class="progress-label" id="stlabel-{{ t.id }}">{{ done_count }}/{{ subtasks|length }} subtasks</span>
+            </div>
+            {% else %}
+            <div class="subtask-progress" id="stprog-{{ t.id }}" style="display:none">
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" id="stbar-{{ t.id }}" style="width:0%"></div></div>
+              <span class="progress-label" id="stlabel-{{ t.id }}">0/0 subtasks</span>
+            </div>
+            {% endif %}
           </div>
 
           <!-- Actions -->
           <div class="todo-actions">
+            <button class="btn-icon expand-btn" title="Subtasks" onclick="toggleSubtasks('{{ t.id }}')" id="stbtn-{{ t.id }}">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                <path d="M3 5h10M3 8h7M3 11h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
             <button class="btn-icon expand-btn" title="Comments" onclick="toggleComments('{{ t.id }}')">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <path d="M14 2H2C1.4 2 1 2.4 1 3v8c0 .6.4 1 1 1h2v3l3.5-3H14c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1z" stroke="currentColor" stroke-width="1.5"/>
@@ -598,7 +607,109 @@ header {
           </div>
         </div>
 
-        <!-- Comments -->
+        <!-- SUBTASKS SECTION -->
+        <div class="subtasks-section" id="subtasks-{{ t.id }}">
+          <div class="subtasks-header">
+            <span>Subtasks</span>
+            <button class="btn-add-subtask" onclick="toggleAddSubtask('{{ t.id }}')">+ Add Subtask</button>
+          </div>
+
+          <!-- Add subtask form -->
+          <div class="add-subtask-form" id="ast-form-{{ t.id }}">
+            <div class="form-grid">
+              <div class="field form-full">
+                <label>Subtask Title</label>
+                <input type="text" id="ast-title-{{ t.id }}" placeholder="e.g. Write unit tests">
+              </div>
+              <div class="field form-full">
+                <label>Description</label>
+                <textarea id="ast-desc-{{ t.id }}" placeholder="Details for this subtask…"></textarea>
+              </div>
+              <div class="field">
+                <label>Due Date <small style="color:var(--danger);font-size:9px;">(≤ task due date{% if t.due_date %}: {{ t.due_date }}{% endif %})</small></label>
+                <input type="date" id="ast-due-{{ t.id }}" {% if t.due_date %}max="{{ t.due_date }}"{% endif %}>
+              </div>
+            </div>
+            <div class="subtask-form-actions">
+              <button class="btn-cancel-subtask" onclick="toggleAddSubtask('{{ t.id }}')">Cancel</button>
+              <button class="btn-save-subtask" onclick="saveSubtask('{{ t.id }}', '{{ t.due_date }}')">Add Subtask</button>
+            </div>
+          </div>
+
+          <!-- Subtask list -->
+          <div class="subtask-list" id="stlist-{{ t.id }}">
+            {% for st in t.get('subtasks', []) %}
+            <div class="subtask-item {% if st.completed %}st-completed{% endif %}" id="st-{{ st.id }}">
+              <div class="subtask-main">
+                <div class="st-check-wrap">
+                  <input type="checkbox" id="stcb-{{ st.id }}" {% if st.completed %}checked{% endif %}
+                         onchange="toggleSubtask('{{ t.id }}', '{{ st.id }}', this)">
+                  <label for="stcb-{{ st.id }}">
+                    <svg width="8" height="7" viewBox="0 0 8 7" fill="none">
+                      <path d="M1 3L3 5.5L7 1" stroke="#0e0e0f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </label>
+                </div>
+                <div class="subtask-body">
+                  <div class="subtask-title">{{ st.title }}</div>
+                  {% if st.description %}<div class="subtask-desc">{{ st.description }}</div>{% endif %}
+                  {% if st.due_date %}<div class="subtask-due" data-due="{{ st.due_date }}">📅 {{ st.due_date }}</div>{% endif %}
+
+                  <!-- Checklist -->
+                  <div class="checklist-wrap" id="cl-wrap-{{ st.id }}">
+                    <div class="checklist-header">
+                      <span class="checklist-label">Checklist</span>
+                      <span class="checklist-progress" id="cl-prog-{{ st.id }}">
+                        {% set checked = st.checklist|selectattr('checked')|list|length %}
+                        {{ checked }}/{{ st.checklist|length }}
+                      </span>
+                    </div>
+                    <div class="checklist-items" id="clitems-{{ st.id }}">
+                      {% for ci in st.checklist %}
+                      <div class="checklist-row {% if ci.checked %}cl-checked{% endif %}" id="clrow-{{ ci.id }}">
+                        <input type="checkbox" id="clcb-{{ ci.id }}" {% if ci.checked %}checked{% endif %}
+                               onchange="toggleChecklistItem('{{ t.id }}','{{ st.id }}','{{ ci.id }}',this)">
+                        <label for="clcb-{{ ci.id }}">
+                          <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
+                            <path d="M1 3L3 5L7 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </label>
+                        <span class="checklist-text">{{ ci.text }}</span>
+                        <button class="btn-del-cl" onclick="deleteChecklistItem('{{ t.id }}','{{ st.id }}','{{ ci.id }}')">✕</button>
+                      </div>
+                      {% endfor %}
+                    </div>
+                    <div class="add-checklist-row">
+                      <input type="text" id="clinput-{{ st.id }}" placeholder="Add checklist item…">
+                      <button class="btn-add-cl" onclick="addChecklistItem('{{ t.id }}','{{ st.id }}')">+ Add</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="subtask-actions">
+                  <button class="btn-st-icon" title="Edit subtask"
+                          onclick="openEditSubtask('{{ t.id }}','{{ st.id }}','{{ st.title|e }}',`{{ st.description|e }}`,'{{ st.due_date }}','{{ t.due_date }}')">
+                    <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+                      <path d="M11.5 1.5l3 3L5 14H2v-3L11.5 1.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                  <button class="btn-st-icon delete" title="Delete subtask" onclick="deleteSubtask('{{ t.id }}','{{ st.id }}')">
+                    <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+                      <path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 10h8l1-10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            {% if not t.get('subtasks', []) %}
+            <div class="empty-state" style="padding:24px 20px;" id="st-empty-{{ t.id }}">
+              <p style="font-size:12px;">No subtasks yet. Click "Add Subtask" to get started.</p>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- COMMENTS SECTION -->
         <div class="comments-section" id="comments-{{ t.id }}">
           <div class="comment-list" id="clist-{{ t.id }}">
             {% for c in t.comments %}
@@ -627,28 +738,16 @@ header {
 
 </div>
 
-<!-- EDIT MODAL -->
+<!-- EDIT TASK MODAL -->
 <div class="modal-overlay" id="editModal">
   <div class="modal">
     <h3>Edit Task</h3>
     <form id="editForm" method="POST">
       <div class="form-grid">
-        <div class="field">
-          <label>Topic</label>
-          <input type="text" name="topic" id="e-topic" required>
-        </div>
-        <div class="field">
-          <label>Sub-topic</label>
-          <input type="text" name="subtopic" id="e-subtopic">
-        </div>
-        <div class="field form-full">
-          <label>Description</label>
-          <textarea name="description" id="e-desc"></textarea>
-        </div>
-        <div class="field">
-          <label>Due Date</label>
-          <input type="date" name="due_date" id="e-due">
-        </div>
+        <div class="field"><label>Topic</label><input type="text" name="topic" id="e-topic" required></div>
+        <div class="field"><label>Sub-topic</label><input type="text" name="subtopic" id="e-subtopic"></div>
+        <div class="field form-full"><label>Description</label><textarea name="description" id="e-desc"></textarea></div>
+        <div class="field"><label>Due Date</label><input type="date" name="due_date" id="e-due"></div>
       </div>
       <div class="modal-actions">
         <button type="button" class="btn-cancel" onclick="closeEdit()">Cancel</button>
@@ -658,28 +757,63 @@ header {
   </div>
 </div>
 
+<!-- EDIT SUBTASK MODAL -->
+<div class="modal-overlay" id="editSubtaskModal">
+  <div class="modal">
+    <h3>Edit Subtask</h3>
+    <div class="form-grid">
+      <div class="field form-full"><label>Title</label><input type="text" id="est-title"></div>
+      <div class="field form-full"><label>Description</label><textarea id="est-desc"></textarea></div>
+      <div class="field">
+        <label>Due Date <small id="est-due-hint" style="color:var(--danger);font-size:9px;"></small></label>
+        <input type="date" id="est-due">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn-cancel" onclick="closeEditSubtask()">Cancel</button>
+      <button type="button" class="btn-save" onclick="saveEditSubtask()">Save</button>
+    </div>
+  </div>
+</div>
+
 <script>
-// Due date coloring
-document.querySelectorAll('.due-tag[id^="due-"]').forEach(el => {
-  const id = el.id.replace('due-', '');
-  const item = document.getElementById('item-' + id);
-  if (item && item.dataset.completed === 'true') return;
-  const due = new Date(el.textContent.replace('📅 ', '').trim() + 'T00:00:00');
+// ── DUE DATE COLORING ───────────────────────────────────────────────────────
+function colorDue(el, dueStr, isCompleted) {
+  if (!el || !dueStr) return;
+  if (isCompleted) return;
+  const due = new Date(dueStr + 'T00:00:00');
   const today = new Date(); today.setHours(0,0,0,0);
   const diff = (due - today) / 86400000;
+  el.classList.remove('overdue','today','upcoming');
   if (diff < 0) el.classList.add('overdue');
   else if (diff === 0) el.classList.add('today');
   else if (diff <= 3) el.classList.add('upcoming');
+}
+
+document.querySelectorAll('.due-tag[id^="due-"]').forEach(el => {
+  const id = el.id.replace('due-', '');
+  const item = document.getElementById('item-' + id);
+  colorDue(el, el.textContent.replace('📅 ', '').trim(), item && item.dataset.completed === 'true');
 });
 
-// Update visible count
+document.querySelectorAll('.subtask-due[data-due]').forEach(el => {
+  const dueStr = el.dataset.due;
+  if (!dueStr) return;
+  const due = new Date(dueStr + 'T00:00:00');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const diff = (due - today) / 86400000;
+  if (diff < 0) el.classList.add('st-overdue');
+  else if (diff === 0) el.classList.add('st-today');
+});
+
+// ── COUNT ───────────────────────────────────────────────────────────────────
 function updateCount() {
   const visible = document.querySelectorAll('.todo-item:not([style*="none"])').length;
   document.getElementById('visible-count').textContent = visible + ' shown';
 }
 updateCount();
 
-// Filter
+// ── FILTER ──────────────────────────────────────────────────────────────────
 function filterTasks(type, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -696,32 +830,27 @@ function filterTasks(type, btn) {
   updateCount();
 }
 
-// Toggle done
+// ── TOGGLE TASK ─────────────────────────────────────────────────────────────
 function toggleDone(id, cb) {
   const item = document.getElementById('item-' + id);
   fetch('/toggle/' + id, { method: 'POST' }).then(() => {
     item.classList.toggle('completed', cb.checked);
     item.dataset.completed = cb.checked.toString();
-    const due = document.getElementById('due-' + id);
-    if (due) {
-      due.classList.remove('overdue','today','upcoming');
-    }
   });
 }
 
-// Delete todo
+// ── DELETE TASK ─────────────────────────────────────────────────────────────
 function deleteTodo(id) {
   if (!confirm('Delete this task?')) return;
   fetch('/delete/' + id, { method: 'POST' }).then(() => {
     const el = document.getElementById('item-' + id);
     el.style.transition = 'opacity 0.2s, transform 0.2s';
-    el.style.opacity = '0';
-    el.style.transform = 'scale(0.97)';
+    el.style.opacity = '0'; el.style.transform = 'scale(0.97)';
     setTimeout(() => el.remove(), 200);
   });
 }
 
-// Edit modal
+// ── EDIT TASK MODAL ─────────────────────────────────────────────────────────
 function openEdit(id, topic, subtopic, desc, due) {
   document.getElementById('editForm').action = '/edit/' + id;
   document.getElementById('e-topic').value = topic;
@@ -730,23 +859,324 @@ function openEdit(id, topic, subtopic, desc, due) {
   document.getElementById('e-due').value = due;
   document.getElementById('editModal').classList.add('open');
 }
-function closeEdit() {
-  document.getElementById('editModal').classList.remove('open');
-}
-document.getElementById('editModal').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeEdit();
-});
+function closeEdit() { document.getElementById('editModal').classList.remove('open'); }
+document.getElementById('editModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeEdit(); });
 
-// Toggle comments
-function toggleComments(id) {
-  const sec = document.getElementById('comments-' + id);
+// ── TOGGLE SUBTASK PANEL ────────────────────────────────────────────────────
+function toggleSubtasks(id) {
+  const sec = document.getElementById('subtasks-' + id);
   sec.classList.toggle('open');
-  if (sec.classList.contains('open')) {
-    document.getElementById('cinput-' + id).focus();
+}
+
+// ── ADD SUBTASK FORM TOGGLE ─────────────────────────────────────────────────
+function toggleAddSubtask(id) {
+  const form = document.getElementById('ast-form-' + id);
+  form.classList.toggle('open');
+  if (form.classList.contains('open')) {
+    document.getElementById('ast-title-' + id).focus();
   }
 }
 
-// Add comment
+// ── SAVE SUBTASK ────────────────────────────────────────────────────────────
+function saveSubtask(todoId, taskDue) {
+  const title = document.getElementById('ast-title-' + todoId).value.trim();
+  if (!title) { alert('Subtask title is required.'); return; }
+  const desc = document.getElementById('ast-desc-' + todoId).value.trim();
+  const due = document.getElementById('ast-due-' + todoId).value;
+
+  // Validate due date
+  if (due && taskDue && due > taskDue) {
+    alert('Subtask due date cannot be later than the task due date (' + taskDue + ').');
+    return;
+  }
+
+  fetch('/subtask/add/' + todoId, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, description: desc, due_date: due })
+  }).then(r => r.json()).then(data => {
+    if (data.success) {
+      const st = data.subtask;
+      // Remove empty state
+      const empty = document.getElementById('st-empty-' + todoId);
+      if (empty) empty.remove();
+
+      // Build subtask HTML
+      const div = document.createElement('div');
+      div.className = 'subtask-item';
+      div.id = 'st-' + st.id;
+      div.innerHTML = buildSubtaskHTML(todoId, st, taskDue);
+      document.getElementById('stlist-' + todoId).appendChild(div);
+
+      // Reset form
+      document.getElementById('ast-title-' + todoId).value = '';
+      document.getElementById('ast-desc-' + todoId).value = '';
+      document.getElementById('ast-due-' + todoId).value = '';
+      toggleAddSubtask(todoId);
+
+      // Update progress
+      updateSubtaskProgress(todoId);
+
+      // Color due date
+      if (st.due_date) {
+        const dueEl = document.querySelector('#st-' + st.id + ' .subtask-due');
+        if (dueEl) {
+          const due2 = new Date(st.due_date + 'T00:00:00');
+          const today = new Date(); today.setHours(0,0,0,0);
+          const diff = (due2 - today) / 86400000;
+          if (diff < 0) dueEl.classList.add('st-overdue');
+          else if (diff === 0) dueEl.classList.add('st-today');
+        }
+      }
+    }
+  });
+}
+
+function buildSubtaskHTML(todoId, st, taskDue) {
+  const dueHtml = st.due_date ? `<div class="subtask-due" data-due="${st.due_date}">📅 ${st.due_date}</div>` : '';
+  const descHtml = st.description ? `<div class="subtask-desc">${escHtml(st.description)}</div>` : '';
+  return `
+    <div class="subtask-main">
+      <div class="st-check-wrap">
+        <input type="checkbox" id="stcb-${st.id}" onchange="toggleSubtask('${todoId}','${st.id}',this)">
+        <label for="stcb-${st.id}">
+          <svg width="8" height="7" viewBox="0 0 8 7" fill="none">
+            <path d="M1 3L3 5.5L7 1" stroke="#0e0e0f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </label>
+      </div>
+      <div class="subtask-body">
+        <div class="subtask-title">${escHtml(st.title)}</div>
+        ${descHtml}
+        ${dueHtml}
+        <div class="checklist-wrap" id="cl-wrap-${st.id}">
+          <div class="checklist-header">
+            <span class="checklist-label">Checklist</span>
+            <span class="checklist-progress" id="cl-prog-${st.id}">0/0</span>
+          </div>
+          <div class="checklist-items" id="clitems-${st.id}"></div>
+          <div class="add-checklist-row">
+            <input type="text" id="clinput-${st.id}" placeholder="Add checklist item…">
+            <button class="btn-add-cl" onclick="addChecklistItem('${todoId}','${st.id}')">+ Add</button>
+          </div>
+        </div>
+      </div>
+      <div class="subtask-actions">
+        <button class="btn-st-icon" onclick="openEditSubtask('${todoId}','${st.id}','${escAttr(st.title)}','${escAttr(st.description)}','${st.due_date}','${taskDue}')">
+          <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+            <path d="M11.5 1.5l3 3L5 14H2v-3L11.5 1.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="btn-st-icon delete" onclick="deleteSubtask('${todoId}','${st.id}')">
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+            <path d="M2 4h12M5 4V2h6v2M6 7v5M10 7v5M3 4l1 10h8l1-10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>`;
+}
+
+// ── TOGGLE SUBTASK COMPLETE ─────────────────────────────────────────────────
+function toggleSubtask(todoId, subtaskId, cb) {
+  fetch('/subtask/toggle/' + todoId + '/' + subtaskId, { method: 'POST' })
+    .then(r => r.json()).then(data => {
+      const stEl = document.getElementById('st-' + subtaskId);
+      stEl.classList.toggle('st-completed', cb.checked);
+      updateSubtaskProgress(todoId);
+      // Auto-complete task
+      if (data.task_completed !== undefined) {
+        const item = document.getElementById('item-' + todoId);
+        const taskCb = document.getElementById('cb-' + todoId);
+        item.classList.toggle('completed', data.task_completed);
+        item.dataset.completed = data.task_completed.toString();
+        taskCb.checked = data.task_completed;
+      }
+    });
+}
+
+// ── DELETE SUBTASK ──────────────────────────────────────────────────────────
+function deleteSubtask(todoId, subtaskId) {
+  if (!confirm('Delete this subtask?')) return;
+  fetch('/subtask/delete/' + todoId + '/' + subtaskId, { method: 'POST' })
+    .then(r => r.json()).then(data => {
+      const el = document.getElementById('st-' + subtaskId);
+      el.remove();
+      updateSubtaskProgress(todoId);
+      // Check if no more subtasks
+      const list = document.getElementById('stlist-' + todoId);
+      if (!list.querySelector('.subtask-item')) {
+        const div = document.createElement('div');
+        div.className = 'empty-state';
+        div.id = 'st-empty-' + todoId;
+        div.style.padding = '24px 20px';
+        div.innerHTML = '<p style="font-size:12px;">No subtasks yet. Click "Add Subtask" to get started.</p>';
+        list.appendChild(div);
+      }
+      if (data.task_completed !== undefined) {
+        const item = document.getElementById('item-' + todoId);
+        const taskCb = document.getElementById('cb-' + todoId);
+        item.classList.toggle('completed', data.task_completed);
+        item.dataset.completed = data.task_completed.toString();
+        taskCb.checked = data.task_completed;
+      }
+    });
+}
+
+// ── UPDATE PROGRESS BAR ─────────────────────────────────────────────────────
+function updateSubtaskProgress(todoId) {
+  const list = document.getElementById('stlist-' + todoId);
+  const allSt = list.querySelectorAll('.subtask-item');
+  const doneSt = list.querySelectorAll('.subtask-item.st-completed');
+  const total = allSt.length;
+  const done = doneSt.length;
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+
+  const bar = document.getElementById('stbar-' + todoId);
+  const label = document.getElementById('stlabel-' + todoId);
+  const prog = document.getElementById('stprog-' + todoId);
+
+  if (bar) bar.style.width = pct + '%';
+  if (label) label.textContent = done + '/' + total + ' subtasks';
+  if (prog) prog.style.display = total > 0 ? 'flex' : 'none';
+}
+
+// ── EDIT SUBTASK MODAL ──────────────────────────────────────────────────────
+let _editStTodoId = '', _editStId = '';
+function openEditSubtask(todoId, stId, title, desc, due, taskDue) {
+  _editStTodoId = todoId; _editStId = stId;
+  document.getElementById('est-title').value = title;
+  document.getElementById('est-desc').value = desc;
+  document.getElementById('est-due').value = due;
+  if (taskDue) {
+    document.getElementById('est-due').max = taskDue;
+    document.getElementById('est-due-hint').textContent = '(≤ ' + taskDue + ')';
+  } else {
+    document.getElementById('est-due').removeAttribute('max');
+    document.getElementById('est-due-hint').textContent = '';
+  }
+  document.getElementById('editSubtaskModal').classList.add('open');
+}
+function closeEditSubtask() { document.getElementById('editSubtaskModal').classList.remove('open'); }
+document.getElementById('editSubtaskModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeEditSubtask(); });
+
+function saveEditSubtask() {
+  const title = document.getElementById('est-title').value.trim();
+  if (!title) { alert('Title is required.'); return; }
+  const desc = document.getElementById('est-desc').value.trim();
+  const due = document.getElementById('est-due').value;
+  const max = document.getElementById('est-due').max;
+  if (due && max && due > max) {
+    alert('Subtask due date cannot be later than the task due date (' + max + ').');
+    return;
+  }
+  fetch('/subtask/edit/' + _editStTodoId + '/' + _editStId, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, description: desc, due_date: due })
+  }).then(r => r.json()).then(data => {
+    if (data.success) {
+      const stEl = document.getElementById('st-' + _editStId);
+      stEl.querySelector('.subtask-title').textContent = title;
+      let descEl = stEl.querySelector('.subtask-desc');
+      if (desc) {
+        if (!descEl) {
+          descEl = document.createElement('div');
+          descEl.className = 'subtask-desc';
+          stEl.querySelector('.subtask-title').after(descEl);
+        }
+        descEl.textContent = desc;
+      } else if (descEl) descEl.remove();
+      let dueEl = stEl.querySelector('.subtask-due');
+      if (due) {
+        if (!dueEl) {
+          dueEl = document.createElement('div');
+          dueEl.className = 'subtask-due';
+          const clWrap = stEl.querySelector('.checklist-wrap');
+          clWrap.before(dueEl);
+        }
+        dueEl.dataset.due = due;
+        dueEl.textContent = '📅 ' + due;
+        dueEl.classList.remove('st-overdue','st-today');
+        const dDate = new Date(due + 'T00:00:00');
+        const today = new Date(); today.setHours(0,0,0,0);
+        const diff = (dDate - today) / 86400000;
+        if (diff < 0) dueEl.classList.add('st-overdue');
+        else if (diff === 0) dueEl.classList.add('st-today');
+      } else if (dueEl) dueEl.remove();
+      closeEditSubtask();
+    }
+  });
+}
+
+// ── CHECKLIST ───────────────────────────────────────────────────────────────
+function addChecklistItem(todoId, stId) {
+  const input = document.getElementById('clinput-' + stId);
+  const text = input.value.trim();
+  if (!text) return;
+  fetch('/checklist/add/' + todoId + '/' + stId, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text })
+  }).then(r => r.json()).then(data => {
+    if (data.success) {
+      const item = data.item;
+      const row = document.createElement('div');
+      row.className = 'checklist-row';
+      row.id = 'clrow-' + item.id;
+      row.innerHTML = `
+        <input type="checkbox" id="clcb-${item.id}" onchange="toggleChecklistItem('${todoId}','${stId}','${item.id}',this)">
+        <label for="clcb-${item.id}">
+          <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
+            <path d="M1 3L3 5L7 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </label>
+        <span class="checklist-text">${escHtml(item.text)}</span>
+        <button class="btn-del-cl" onclick="deleteChecklistItem('${todoId}','${stId}','${item.id}')">✕</button>`;
+      document.getElementById('clitems-' + stId).appendChild(row);
+      input.value = '';
+      updateChecklistProgress(stId);
+    }
+  });
+}
+
+function toggleChecklistItem(todoId, stId, itemId, cb) {
+  fetch('/checklist/toggle/' + todoId + '/' + stId + '/' + itemId, { method: 'POST' })
+    .then(r => r.json()).then(data => {
+      const row = document.getElementById('clrow-' + itemId);
+      row.classList.toggle('cl-checked', cb.checked);
+      updateChecklistProgress(stId, data.checked, data.total);
+    });
+}
+
+function deleteChecklistItem(todoId, stId, itemId) {
+  fetch('/checklist/delete/' + todoId + '/' + stId + '/' + itemId, { method: 'POST' })
+    .then(r => r.json()).then(data => {
+      if (data.success) {
+        document.getElementById('clrow-' + itemId).remove();
+        updateChecklistProgress(stId);
+      }
+    });
+}
+
+function updateChecklistProgress(stId, checked, total) {
+  const prog = document.getElementById('cl-prog-' + stId);
+  if (!prog) return;
+  if (checked !== undefined && total !== undefined) {
+    prog.textContent = checked + '/' + total;
+    return;
+  }
+  const items = document.querySelectorAll('#clitems-' + stId + ' .checklist-row');
+  const checkedItems = document.querySelectorAll('#clitems-' + stId + ' .checklist-row.cl-checked');
+  prog.textContent = checkedItems.length + '/' + items.length;
+}
+
+// ── COMMENTS ────────────────────────────────────────────────────────────────
+function toggleComments(id) {
+  const sec = document.getElementById('comments-' + id);
+  sec.classList.toggle('open');
+  if (sec.classList.contains('open')) document.getElementById('cinput-' + id).focus();
+}
+
 function addComment(todoId) {
   const input = document.getElementById('cinput-' + todoId);
   const text = input.value.trim();
@@ -760,7 +1190,7 @@ function addComment(todoId) {
         const now = new Date().toLocaleString('en-US', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
         const div = document.createElement('div');
         div.className = 'comment-item';
-        div.innerHTML = `<div class="comment-text">${text}</div><div class="comment-time">${now}</div><button class="btn-del-comment" onclick="deleteComment('${todoId}', this.closest('.comment-item').dataset.cid)">✕</button>`;
+        div.innerHTML = `<div class="comment-text">${escHtml(text)}</div><div class="comment-time">${now}</div><button class="btn-del-comment" onclick="deleteComment('${todoId}',this.closest('.comment-item').id.replace('ci-',''))">✕</button>`;
         list.appendChild(div);
         input.value = '';
         const cnt = document.getElementById('ccount-' + todoId);
@@ -769,28 +1199,49 @@ function addComment(todoId) {
     });
 }
 
-// Delete comment
 function deleteComment(todoId, commentId) {
   fetch('/comment/delete/' + todoId + '/' + commentId, { method: 'POST' })
     .then(r => r.json()).then(data => {
       if (data.success) {
         const el = document.getElementById('ci-' + commentId);
-        if (el) {
-          el.remove();
-          const cnt = document.getElementById('ccount-' + todoId);
-          cnt.textContent = Math.max(0, parseInt(cnt.textContent) - 1);
-        }
+        if (el) el.remove();
+        const cnt = document.getElementById('ccount-' + todoId);
+        cnt.textContent = Math.max(0, parseInt(cnt.textContent) - 1);
       }
     });
 }
 
-// Enter to post comment
+// ── KEYBOARD SHORTCUTS ───────────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && e.target.matches('input[id^="cinput-"]')) {
-    const id = e.target.id.replace('cinput-', '');
-    addComment(id);
+  if (e.key === 'Escape') { closeEdit(); closeEditSubtask(); }
+  if (e.key === 'Enter') {
+    if (e.target.matches('input[id^="cinput-"]')) {
+      addComment(e.target.id.replace('cinput-',''));
+    }
+    if (e.target.matches('input[id^="clinput-"]')) {
+      const stId = e.target.id.replace('clinput-','');
+      // Find todoId — look for parent subtask
+      const stEl = e.target.closest('.subtask-item');
+      if (stEl) {
+        const stListEl = stEl.closest('.subtask-list');
+        if (stListEl) {
+          const todoId = stListEl.id.replace('stlist-','');
+          addChecklistItem(todoId, stId);
+        }
+      }
+    }
   }
 });
+
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+function escHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(str) {
+  if (!str) return '';
+  return str.replace(/'/g,"\\'").replace(/\n/g,' ');
+}
 </script>
 
 </body>
