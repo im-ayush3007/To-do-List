@@ -564,7 +564,7 @@ header {
               </span>
             </div>
             <!-- Subtask progress -->
-            {% set subtasks = t.get('subtasks', []) %}
+            {% set subtasks = t.subtasks %}
             {% if subtasks %}
             {% set done_count = subtasks|selectattr('completed')|list|length %}
             {% set progress = (done_count / (subtasks|length) * 100)|int %}
@@ -638,7 +638,7 @@ header {
 
           <!-- Subtask list -->
           <div class="subtask-list" id="stlist-{{ t.id }}">
-            {% for st in t.get('subtasks', []) %}
+            {% for st in subtasks %}
             <div class="subtask-item {% if st.completed %}st-completed{% endif %}" id="st-{{ st.id }}">
               <div class="subtask-main">
                 <div class="st-check-wrap">
@@ -701,7 +701,7 @@ header {
               </div>
             </div>
             {% endfor %}
-            {% if not t.get('subtasks', []) %}
+            {% if not subtasks %}
             <div class="empty-state" style="padding:24px 20px;" id="st-empty-{{ t.id }}">
               <p style="font-size:12px;">No subtasks yet. Click "Add Subtask" to get started.</p>
             </div>

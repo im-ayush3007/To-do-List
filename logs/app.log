@@ -1,0 +1,172 @@
+2026-04-15 20:50:14,747 [INFO] app: Logging initialized
+2026-04-15 20:50:14,753 [INFO] app: Logging initialized
+2026-04-15 20:50:14,753 [INFO] app: Logging initialized
+2026-04-15 20:50:27,352 [INFO] app: Logging initialized
+2026-04-15 20:50:27,354 [INFO] app: Logging initialized
+2026-04-15 20:50:27,354 [INFO] app: Logging initialized
+2026-04-15 20:57:08,440 [INFO] app: Logging initialized
+2026-04-15 20:57:08,451 [INFO] app: Loading index page
+2026-04-15 20:57:08,455 [ERROR] app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: todo
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/routes.py", line 10, in index
+    todos = Todo.query.all()
+            ^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2711, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2864, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: todo
+[SQL: SELECT todo.id AS todo_id, todo.topic AS todo_topic, todo.subtopic AS todo_subtopic, todo.description AS todo_description, todo.due_date AS todo_due_date, todo.completed AS todo_completed, todo.created_at AS todo_created_at 
+FROM todo]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-04-15 20:59:50,616 [INFO] app: Logging initialized
+2026-04-15 20:59:50,632 [INFO] app: Loading index page
+2026-04-15 21:02:53,110 [INFO] app: Logging initialized
+2026-04-15 21:03:35,203 [INFO] app: Logging initialized
+2026-04-15 21:03:35,601 [INFO] app: Logging initialized
+2026-04-15 21:03:56,928 [INFO] app: Loading index page
+2026-04-15 21:06:05,374 [INFO] app: Loading index page
+2026-04-15 21:24:59,167 [INFO] app: Loading index page
+2026-04-15 21:26:25,778 [INFO] app: Task created: 4072e82f-9483-4b49-8e54-08ef5dc55bc7
+2026-04-15 21:26:25,784 [INFO] app: Loading index page
+2026-04-15 22:09:52,993 [INFO] app: Loading index page
+2026-04-15 22:09:54,063 [INFO] app: Loading index page
+2026-04-15 22:09:56,715 [INFO] app: Loading index page
+2026-04-15 22:09:57,482 [INFO] app: Loading index page
+2026-04-15 22:13:21,817 [INFO] app: Logging initialized
+2026-04-15 22:13:22,278 [INFO] app: Logging initialized
+2026-04-15 22:13:32,560 [INFO] app: Loading index page
+2026-04-15 22:13:34,167 [INFO] app: Loading index page
+2026-04-15 22:13:40,391 [INFO] app: Loading index page
+2026-04-15 22:14:20,019 [INFO] app: Loading index page
+2026-04-15 22:14:25,857 [INFO] app: Loading index page
+2026-04-15 22:17:53,189 [INFO] app: Logging initialized
+2026-04-15 22:18:00,842 [INFO] app: Logging initialized
+2026-04-15 22:18:30,931 [INFO] app: Logging initialized
+2026-04-15 22:18:31,323 [INFO] app: Logging initialized
+2026-04-15 22:18:38,176 [INFO] app: Loading index page
+2026-04-15 22:23:04,828 [INFO] app: Logging initialized
+2026-04-15 22:23:05,313 [INFO] app: Logging initialized
+2026-04-15 22:23:15,170 [INFO] app: Loading index page
+2026-04-15 22:24:58,829 [INFO] app: Logging initialized
+2026-04-15 22:24:58,841 [INFO] app: Loading index page
+2026-04-15 22:24:58,875 [ERROR] app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/routes.py", line 11, in index
+    return render_template('index.html', todos=todos)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/templates/index.html", line 641, in top-level template code
+    {% for st in t.get('subtasks', []) %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Dev/Working/Project_Mangalyaan V2/.venv/lib/python3.12/site-packages/jinja2/utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'models.Todo object' has no attribute 'get'
+2026-04-15 22:26:58,413 [INFO] app: Logging initialized
+2026-04-15 22:26:58,424 [INFO] app: Loading index page
+2026-04-15 22:28:29,149 [INFO] app: Logging initialized
+2026-04-15 22:28:29,548 [INFO] app: Logging initialized
+2026-04-15 22:28:38,635 [INFO] app: Loading index page
+2026-04-15 22:32:33,197 [INFO] app: Logging initialized
+2026-04-15 22:32:52,886 [INFO] app: Logging initialized
+2026-04-15 22:33:00,682 [INFO] app: Logging initialized
+2026-04-15 22:33:00,709 [INFO] app: Subtask created: ef0a1dd8-5866-4b0c-9c31-16be49408e08 for task 4a1a487b-3f82-4acb-9eaf-1ed8bd013663
+2026-04-15 22:33:00,713 [INFO] app: Subtask toggled: ef0a1dd8-5866-4b0c-9c31-16be49408e08 -> True
+2026-04-15 22:33:00,716 [INFO] app: Subtask deleted: ef0a1dd8-5866-4b0c-9c31-16be49408e08
+2026-04-15 22:33:31,795 [INFO] app: Logging initialized
+2026-04-15 22:33:45,444 [INFO] app: Logging initialized
+2026-04-15 22:33:45,839 [INFO] app: Logging initialized
+2026-04-15 22:33:51,928 [INFO] app: Loading index page
+2026-04-15 22:34:17,944 [INFO] app: Subtask created: 9b04f835-144a-4b0c-a9f3-d0aed79f13cf for task 4072e82f-9483-4b49-8e54-08ef5dc55bc7
+2026-04-15 22:34:21,247 [INFO] app: Subtask toggled: 9b04f835-144a-4b0c-a9f3-d0aed79f13cf -> True
+2026-04-15 22:34:22,472 [INFO] app: Subtask toggled: 9b04f835-144a-4b0c-a9f3-d0aed79f13cf -> False
+2026-04-15 22:34:23,604 [INFO] app: Subtask toggled: 9b04f835-144a-4b0c-a9f3-d0aed79f13cf -> True
+2026-04-15 22:34:24,255 [INFO] app: Subtask toggled: 9b04f835-144a-4b0c-a9f3-d0aed79f13cf -> False
+2026-04-15 22:34:24,887 [INFO] app: Subtask toggled: 9b04f835-144a-4b0c-a9f3-d0aed79f13cf -> True
+2026-04-15 22:34:25,588 [INFO] app: Subtask toggled: 9b04f835-144a-4b0c-a9f3-d0aed79f13cf -> False
+2026-04-15 22:34:39,281 [INFO] app: Subtask created: 1b2201b2-88f2-4a05-8555-27d074889698 for task 4072e82f-9483-4b49-8e54-08ef5dc55bc7
+2026-04-15 22:34:43,326 [INFO] app: Subtask toggled: 9b04f835-144a-4b0c-a9f3-d0aed79f13cf -> True
+2026-04-15 22:34:46,507 [INFO] app: Task toggled: 4072e82f-9483-4b49-8e54-08ef5dc55bc7 -> True
+2026-04-15 22:34:48,920 [INFO] app: Task toggled: 4072e82f-9483-4b49-8e54-08ef5dc55bc7 -> False
+2026-04-15 22:34:49,472 [INFO] app: Task toggled: 4072e82f-9483-4b49-8e54-08ef5dc55bc7 -> True
+2026-04-15 22:34:53,203 [INFO] app: Task toggled: 4a1a487b-3f82-4acb-9eaf-1ed8bd013663 -> True
+2026-04-15 22:34:54,020 [INFO] app: Task toggled: 4a1a487b-3f82-4acb-9eaf-1ed8bd013663 -> False
+2026-04-15 22:34:54,604 [INFO] app: Task toggled: 4a1a487b-3f82-4acb-9eaf-1ed8bd013663 -> True
+2026-04-15 22:34:57,450 [INFO] app: Loading index page
+2026-04-15 22:37:23,431 [INFO] app: Loading index page
+2026-04-15 22:37:28,160 [INFO] app: Loading index page
+2026-04-15 22:39:21,348 [INFO] app: Loading index page
